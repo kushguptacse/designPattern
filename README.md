@@ -11,7 +11,7 @@
 1.	The Open-Closed Principle (OCP) states that classes should be open for extension but closed for modification.
 2.	It means that there should not be new changes done in the existing tested Parent class. but yes you can create new subclass and add new feature in child class. 
 3.	In Java - Collection interface has own methods and List has it's own specific methods. if a new method needs to be added into List. it will not be added into Collection interface because this new method might not have any significance in Set interface. 
-4.	For example - While re-factoring collect everything which cannot be change and make abstract parent class out of it and make abstract methods of behavior which can be changed. these method will be provided by children and hence they are open for extension. and parent class fields and methods will never be changed and hence closed for extension.
+4.	For example - While re-factoring collect everything which cannot be change and make abstract parent class out of it and make abstract methods of behavior which can be changed. these method will be provided by children and hence they are open for extension. and parent class fields and methods will never be changed and hence closed for modification.
 
 # Design Pattern
 There are three categories of design patterns  - 
