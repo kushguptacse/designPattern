@@ -22,11 +22,17 @@
 2.	It means interface should be highly cohesive. Clients should not be forced to override method which is totally irrelevant just because someone has added a new method into the parent interface.
 3.	Solution is to extract out new child interface which will have that newly added method.
 
+####	Dependency Inversion Principle ->
+1.	High level module should not depend upon low level module. both should depend upon abstractions. Abstractions should not depend upon details.details should depend upon abstractions.
+2.  For example - Instead of creating objects inside a method it is better to pass dependency via argument. argument type can be interface. so that method behavior will not be bind to any child.
+3.	spring dependency injection is one way of DI.
+
+
 # Design Pattern
 There are three categories of design patterns  - 
-*   **Creational** -> These design patterns provide ways to create objects while hiding the creation logic, instead of instantiating objects directly using the new operator. This gives the program more flexibility in deciding which objects need to be created for a given use case.
+*   **Creational** -> These design patterns provide ways to create objects while hiding the creation logic, instead of instantiating objects directly using the new operator. This gives the program more flexibility in deciding which objects need to be created for a given use case. Deals with how objects are created. It deals with how classes and objects communicates with each other.
 *   **Behavioral** -> These design patterns are specifically concerned with communication between objects.
-*   **Structural** -> These design patterns deal with class and object composition. The concept of inheritance is used to compose interfaces and define ways to compose objects to obtain new functionality.
+*   **Structural** -> These design patterns deal with class and object composition. The concept of inheritance is used to compose interfaces and define ways to compose objects to obtain new functionality.	It deals with how classes and objects are arranged.
 
 ## Creational -> 
 **Builder ->**<br/>
