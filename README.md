@@ -10,13 +10,22 @@
 ####	Open-Closed Principle ->
 1.	The Open-Closed Principle (OCP) states that classes should be open for extension but closed for modification.
 2.	It means that there should not be new changes done in the existing tested Parent class. but yes you can create new subclass and add new feature in child class. 
-3.	In Java - Collection interface has own methods and List has it's own specific methods. if a new method needs to be added into List. it will not be added into Collection interface because this new method might not have any significance in Set interface. 
-4.	For example - While re-factoring collect everything which cannot be change and make abstract parent class out of it and make abstract methods of behavior which can be changed. these method will be provided by children and hence they are open for extension. and parent class fields and methods will never be changed and hence closed for modification.
+3.	For example - While re-factoring collect everything which cannot be change and make abstract parent class out of it and make abstract methods of behavior which can be changed. these method will be provided by children and hence they are open for extension. and parent class fields and methods will never be changed and hence closed for modification.
+
+####	Liskov Substitution Principle (LSP) ->
+1.	(LSP) applies to inheritance hierarchies, specifying that you should design your classes such that parent dependency can be substituted with subclasses without effecting the original behavior.
+2.	Suppose we have Rectangle and Square class. where Square is a child of Rectangle. by making above inheritance if we create a method that takes Rectangle as a argument and validate height and width to be different. above method will work if rectangle is passed but this method fail if square is passed.
+3. Above code issue is that by introducing child class we have changed the desired behavior which is height and width is not always same. Solution in this case is to avoid Inheritance.
+
+####	Interface Segregation Principle ->
+1.	Clients should not be forced to depend upon interfaces that they do not use.
+2.	It means interface should be highly cohesive. Clients should not be forced to override method which is totally irrelevant just because someone has added a new method into the parent interface.
+3.	Solution is to extract out new child interface which will have that newly added method.
 
 # Design Pattern
 There are three categories of design patterns  - 
 *   **Creational** -> These design patterns provide ways to create objects while hiding the creation logic, instead of instantiating objects directly using the new operator. This gives the program more flexibility in deciding which objects need to be created for a given use case.
-*   **Behavioural** -> These design patterns are specifically concerned with communication between objects.
+*   **Behavioral** -> These design patterns are specifically concerned with communication between objects.
 *   **Structural** -> These design patterns deal with class and object composition. The concept of inheritance is used to compose interfaces and define ways to compose objects to obtain new functionality.
 
 ## Creational -> 
