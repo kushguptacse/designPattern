@@ -36,7 +36,18 @@ There are three categories of design patterns  -
 
 ## Creational -> 
 **Builder ->**<br/>
-1.  It is used when we have lots of fields  by which we can create object. out of it some of them are mandatory and some are optional.
+1.  It is used when we have lots of fields  by which we can create object. out of it some of them are mandatory and some are optional. or we have multiple steps to create a constructor.
 2.	Instead of using multiple overloaded constructor we can use Builder api to construct objects.
-3.	In Java StringBuilder is a builder which builds on String and hence save memory of un-necessary concatenation.
+3.	when we want to implement immutable class of DTO we can use builder design pattern and pick implementation where static inner class object is used. this approach is preferred even if immutable is not needed as it gives better readability. for e.g. -> we wanted to create immutable class but with facility of some optional arguments also. here Builder pattern can be used.
+4.	In Java StringBuilder is a builder which builds on String and hence save memory of un-necessary concatenation. It is not 100% following builder design. java.util.Calendar.Builder is example of builder design pattern
+5.	As a best practice create constructor inside builder with mandatory fields which will call DTO constructor. and non mandatory fields will be set via different chaining builder method. in this way it is sure that object cannot be created without mandatory fields.
 
+**Simple Factory ->**<br/>
+1.	here we simply move the instantiation logic to other class and most commonly to the static method of that seperate class.
+2.  It is used when we want to create different instances according to some fields passed as arguments to the static method conditionally.
+3.  It is different then Factory design pattern.
+4.  java.test.NumberFormat is example of simple factory.
+5.	you can also combine other design pattern with it. for example factory will give builder instance.
+6.  the criteria used by simple factory to create object can get complex with time with introduction of more and more conditions. in this case factory method design pattern is useful. as inside it the object is created by childrens of factory.
+
+**Factory Method->**<br/>
