@@ -48,6 +48,14 @@ There are three categories of design patterns  -
 3.  It is different then Factory design pattern.
 4.  java.test.NumberFormat is example of simple factory.
 5.	you can also combine other design pattern with it. for example factory will give builder instance.
-6.  the criteria used by simple factory to create object can get complex with time with introduction of more and more conditions. in this case factory method design pattern is useful. as inside it the object is created by childrens of factory.
+6.  the criteria used by simple factory to create object can get complex with time with introduction of more and more conditions. in this case factory method design pattern is useful. as inside it the object is created by children of factory and client code does not change.
 
 **Factory Method->**<br/>
+1.	here we simply move the instantiation logic to sub-classes. If we have product instance hierarchy and possibility of future additions this pattern is preferred.
+2.	We Use this pattern when we do not know in advance which class we may needed to create beforehand and also to allow new classes to be added into the system and handle their creation without affecting client code.
+3.	java.util.AbstractCollection has abstract method iterator() which is example factory method pattern. here subclasses like ArrayList will give instance of iterator.
+4.	pitfalls -> it is tough to re-factor existing code to use factory method pattern.Even though factory method pattern has advantage that we don't need to modify existing code of factory method, we often end up writing large number of classes whose only job is to instantiate new products. Although this is a drawback, it outweighs the other option of modifying existing code.
+5.	simple factory on other hand does not uses inheritance it just has static method which create objects. in factory children of factory class create instances.
+
+**Prototype->**<br/>
+1.	When object we want to create is very complex. and we want to create many such instances of class, then we use existing instance as prototype.
