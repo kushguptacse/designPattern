@@ -75,3 +75,18 @@ There are three categories of design patterns  -
 7.	javax.xml.parsers.DocumentBuilderFactory is example of abstract factory design pattern.
 8.	*DIFF->* factory-method hides concrete objects where as abstract Factory hides factories as well as concrete objects. Factory-method concerned with suitable objects and its sub-classes, where as AF suitable when multiple objects work together & client must use same family objects while working. 
 9.	it is more complex to implement then other factories pattern.
+
+**Singleton->**<br/>
+1.	A singleton class has only 1 instance shared globally among the application.
+2.	Eager Singleton - as soon as class loaded instance is created.
+3.	Lazy Singleton - when first time asked instance is created.
+4. 	Make private constructor.
+5.	Lazy singleton - one approach is to make variable volatile and apply double checking lock to create instance inside getInstance static method.
+6.	Lazy singleton - 2 approach is to create static class and inside it create static instance variable and load directly. benefit here is that no synchronization issue exists.
+7.	Lazy singleton - 3 approach is to use enum directly. (Serializable safe)
+8.	it is not mandatory to override clone method as our singleton does not override Cloneable interface and hence if someone call clone method on our singleton cloneNotSUpported exception will be thrown.
+9.  java.lang.Runtime class is example of singleton(eager).
+10.	if mutable fields are present in singleton class then it might lead to in-consistent behavior as this instance is shared globally.
+11.	Logging framework uses singleton design pattern.
+
+**Object Pool->**<br/>
