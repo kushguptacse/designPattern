@@ -59,3 +59,8 @@ There are three categories of design patterns  -
 
 **Prototype->**<br/>
 1.	When object we want to create is very complex. and we want to create many such instances of class, then we use existing instance as prototype.
+2.	We can use it when object creation is very complex and we might want cloned object with initial state.
+3.	If class which needs to be prototyped has several mutable fields then it gets quite complicated to keep deep cloning.
+4.	Prototypes are very useful when dealing with composite and decorator pattern.
+5.	To get the initial instance whose clone we wanted to return we can you registry class where initial objects are referenced and from there other codes can access to clone.
+6.	Object.clone method is example of prototype design pattern as it creates prototype of the Objects that override clone method. In java Cloneable marker interface also needed to be implement.

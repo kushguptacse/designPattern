@@ -27,15 +27,15 @@ public class UserDTO {
 		return age;
 	}
 
-	public void setName(String name) {
+	private void setName(String name) {
 		this.name = name;
 	}
 
-	public void setAddress(String address) {
+	private void setAddress(String address) {
 		this.address = address;
 	}
 
-	public void setAge(String age) {
+	private void setAge(String age) {
 		this.age = age;
 	}
 
