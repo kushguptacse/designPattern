@@ -64,3 +64,14 @@ There are three categories of design patterns  -
 4.	Prototypes are very useful when dealing with composite and decorator pattern.
 5.	To get the initial instance whose clone we wanted to return we can you registry class where initial objects are referenced and from there other codes can access to clone.
 6.	Object.clone method is example of prototype design pattern as it creates prototype of the Objects that override clone method. In java Cloneable marker interface also needed to be implement.
+
+**Abstract Factory->**<br/>
+1.	Abstract Factory is used When two or more objects which works together forming a set and there can be multiple sets that can be created by client code.
+2.	While implementing it first categorize products into sets and create factory class for each set of products to return instances. 
+3.	Abstract factory uses factory method pattern. Here an abstract class/interface will have multiple factory methods(for each product in a set).
+4.	Example- Different cloud providers can have factory classes for GCE instance, EC2 instance, s3 storage, google cloud storage. but we know if we are using AWS cloud provider only AWS related resources can be used. similarly for gcp also. hence they form a set. So, Basically when we want to constrain object creation. so that they all work together then abstract factory is good design pattern.
+5.	Factory can be used to implement singletons.
+6.	Adding a new product to the system for e.g. Database in our example. we need to do changes in base factory as well as all the implementing factory.
+7.	javax.xml.parsers.DocumentBuilderFactory is example of abstract factory design pattern.
+8.	*DIFF->* factory-method hides concrete objects where as abstract Factory hides factories as well as concrete objects. Factory-method concerned with suitable objects and its sub-classes, where as AF suitable when multiple objects work together & client must use same family objects while working. 
+9.	it is more complex to implement then other factories pattern.
