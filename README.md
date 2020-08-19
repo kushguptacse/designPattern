@@ -34,8 +34,8 @@
 # Design Pattern
 There are three categories of design patterns  - 
 *   **Creational** -> These design patterns provide ways to create objects while hiding the creation logic, instead of instantiating objects directly using the new operator. This gives the program more flexibility in deciding which objects need to be created for a given use case. Deals with how objects are created. It deals with how classes and objects communicates with each other.
+*   **Structural** -> These design patterns deal with how classes and objects are arranged or composed. The concept of inheritance is used to compose interfaces and define ways to compose objects to obtain new functionality.
 *   **Behavioral** -> These design patterns are specifically concerned with communication between objects.
-*   **Structural** -> These design patterns deal with class and object composition. The concept of inheritance is used to compose interfaces and define ways to compose objects to obtain new functionality.	It deals with how classes and objects are arranged.
 
 ## Creational -> 
 **Builder ->**<br/>
@@ -46,7 +46,7 @@ There are three categories of design patterns  -
 5.	As a best practice create constructor inside builder with mandatory fields which will call DTO constructor. and non mandatory fields will be set via different chaining builder method. in this way it is sure that object cannot be created without mandatory fields.
 
 **Simple Factory ->**<br/>
-1.	here we simply move the instantiation logic to other class and most commonly to the static method of that seperate class.
+1.	here we simply move the instantiation logic to other class and most commonly to the static method of that separate class.
 2.  It is used when we want to create different instances according to some fields passed as arguments to the static method conditionally.
 3.  It is different then Factory design pattern.
 4.  java.test.NumberFormat is example of simple factory.
@@ -76,7 +76,7 @@ There are three categories of design patterns  -
 5.	Factory can be used to implement singletons.
 6.	Adding a new product to the system for e.g. Database in our example. we need to do changes in base factory as well as all the implementing factory.
 7.	javax.xml.parsers.DocumentBuilderFactory is example of abstract factory design pattern.
-8.	*DIFF->* factory-method hides concrete objects where as abstract Factory hides factories as well as concrete objects. Factory-method concerned with suitable objects and its sub-classes, where as AF suitable when multiple objects work together & client must use same family objects while working. 
+8.	`DIFF->` factory-method hides concrete objects where as abstract Factory hides factories as well as concrete objects. Factory-method concerned with suitable objects and its sub-classes, where as AF suitable when multiple objects work together & client must use same family objects while working. 
 9.	it is more complex to implement then other factories pattern.
 
 **Singleton->**<br/>
@@ -101,7 +101,28 @@ There are three categories of design patterns  -
 6.	Pooling Object is only beneficial if they involve costly initialization of external resources like database connections, thread.
 7.	java.util.concurrent.ThreadPoolExecutor is example of object pool. we use this method via Executors.newCachedThreadPool() and it returns ExecutorService interface. and when we submit runnable task it use threadPool to allocate new thread.
 8.	Prototype Design Pattern always returns copy of object and never re-use any exiting object. where as ObjectPool uses caching to save object and can be later used when needed. in object pool object after using needs to be reset otherwise it might lead to memory leak on other hand cloned object in prototype design pattern does not additional effort to reset.
-9.	_DisAdv_ -><br/>
+9.	`DisAdv ->`<br/>
 > Difficult to use in re-factoring as client code need to change to use objectPool and original class whose objects need to be pooled also need to provide reset method logic.<br/>
 > If you create objects when the code asked and none are available you need to write additional logic to maintain or trim the pool size or else you will end-up with very large pool.<br/>
 > Successful implementation requires client to call reset method after finish using the object.<br/>
+
+## Structural -> 
+**Adapter ->**<br/>
+1.	We have an existing object which provides the functionality that client needs.But client cannot use this object as it expect object with different interface.
+2.	So, here we use adapter pattern. by using it we make exiting object work with client by adapting the object to client's expected interface.
+3.	This pattern is also called Wrapper as it "wraps" object according to client need.
+4.  Two Types of adapter pattern -> class adapter and object adapter.
+5.	We have Adaptee (class which has method operation that fulfills client need) and target interface (whose method client invokes). so what we can do we can create a new class adapter which implements target interface.
+> Class adapter: Here adapter extends Adaptee class and then call operation method directly inside overridden method of Target interface which client calls. Here we make use of inheritance.
+> Object adapter: Here instead of extending Adaptee. object of Adaptee is created in constructor and then using that instance inside overridden method of target ->operation method is called. Here we make use of composition.
+6.	The Amount of work adapter needs to do depends upon the difference between target interface and adaptee object. for ex-> if method arguments are similar adapter has very less work to do.
+7.	Using class adapter you can override adaptee method also but don't do that as you end up with adapter that behaves differently then adaptee. which might lead to bugs.
+8.	prefer object adapter over class adapter as it provide flexibility that in future we can replace adaptee with child class. If we have both target and adaptee as classes we cannot use class adapter pattern. here object adapter is used.
+9.	Class adapter is also called two way adapter, since it can be used in place of target as well as adaptee.
+10.	java.io.InputStreamReader and java.io.OutputStreamWritter are examples of object adapter design pattern.
+11.	Here Client wants to use Reader and Writer objects and if we have InputStream and OutputStream available. in such case InputStreamReader will be adaptor class which takes InputStream in constructor argument and perform conversion to make it compatible with Reader methods.
+12.	`Difference between Adapter and Decorator ->`<br/>
+> Simply adapt the an object to another interface without changing behavior.On other hands Decorator enhances object behavior without changing interface. <br/>
+> Since the target and source are not different we cannot use adaptor inside adaptor easily. But nested decorator is possible as here interface does not change.<br/>
+
+**Bridge ->**<br/>
