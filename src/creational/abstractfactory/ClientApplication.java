@@ -3,10 +3,11 @@ package creational.abstractfactory;
 import creational.abstractfactory.Instance.Capacity;
 
 public class ClientApplication {
-
+	
 	private ResourceFactory resourceFactory;
 
 	public ClientApplication(ResourceFactory resourceFactory) {
+		System.out.println(this.resourceFactory);
 		this.resourceFactory = resourceFactory;
 	}
 

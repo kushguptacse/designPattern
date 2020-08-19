@@ -1,5 +1,8 @@
 # SOLID Design Principle
 
+#####	Summary of all design pattern is present in below url-</br>
+ https://drive.google.com/file/d/1p2qzVFeOfknyn_Il4N5vFVGTlRAIyb7j/view
+
 ####	Single Responsibility Principle ->
 1.  (SRP) states that there should never be more than one reason for a class to change.
 2.  It means class should be highly cohesive. example if we have created a single class which make connection with the server. so our class code will change if protocol changes (i.e. from https to http) OR payload changes (json to xml) OR security changes. 
@@ -90,3 +93,15 @@ There are three categories of design patterns  -
 11.	Logging framework uses singleton design pattern.
 
 **Object Pool->**<br/>
+1.	If cost of creating objects of class is high and we want to maintain pool of objects of this class for short duration,then we can use an object pool. like - threads, database connections.
+2.	Here we either pre-create object of class or collect un-used object in an memory cache. so, when needed object is returned from this cache.
+3.	It is most complicated pattern to implement efficiently (Due to multi-threading environment).
+4.	Implementation - Methods to acquire and release object should be provided. after releasing object. that object state should be reset so that it can be used again.
+5.	A thread-safe caching of objects should be done in pool. so that there state remain consistent.
+6.	Pooling Object is only beneficial if they involve costly initialization of external resources like database connections, thread.
+7.	java.util.concurrent.ThreadPoolExecutor is example of object pool. we use this method via Executors.newCachedThreadPool() and it returns ExecutorService interface. and when we submit runnable task it use threadPool to allocate new thread.
+8.	Prototype Design Pattern always returns copy of object and never re-use any exiting object. where as ObjectPool uses caching to save object and can be later used when needed. in object pool object after using needs to be reset otherwise it might lead to memory leak on other hand cloned object in prototype design pattern does not additional effort to reset.
+9.	_DisAdv_ -><br/>
+> Difficult to use in re-factoring as client code need to change to use objectPool and original class whose objects need to be pooled also need to provide reset method logic.<br/>
+> If you create objects when the code asked and none are available you need to write additional logic to maintain or trim the pool size or else you will end-up with very large pool.<br/>
+> Successful implementation requires client to call reset method after finish using the object.<br/>
