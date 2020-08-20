@@ -122,7 +122,34 @@ There are three categories of design patterns  -
 10.	java.io.InputStreamReader and java.io.OutputStreamWritter are examples of object adapter design pattern.
 11.	Here Client wants to use Reader and Writer objects and if we have InputStream and OutputStream available. in such case InputStreamReader will be adaptor class which takes InputStream in constructor argument and perform conversion to make it compatible with Reader methods.
 12.	`Difference between Adapter and Decorator ->`<br/>
-> Simply adapt the an object to another interface without changing behavior.On other hands Decorator enhances object behavior without changing interface. <br/>
+> Simply adapt an object to another interface without changing behavior.On other hands Decorator enhances object behavior without changing interface. <br/>
 > Since the target and source are not different we cannot use adaptor inside adaptor easily. But nested decorator is possible as here interface does not change.<br/>
 
 **Bridge ->**<br/>
+1.	Our implementation and abstraction are closely bind with each other. we want them to be loosely coupled so, that changes in one will not impact other.
+2.	We achieve this by making two separate inheritance hierarchy. one for implementation and one for abstraction. and then we use composition to bridge these two separate inheritance hierarchy.
+3.	Abstractions here can be concrete class also. here it means we can add new method in abstraction hierarchy and it will not impact implementation hierarchy and vice versa. this is because implementation has totally different method which will serve the needs of abstraction methods.
+4.	In case we have single implementation only we can skip creating abstract implementer.
+5.`Example` - java.util.Collections.newSetFromMap(map) method. This method return Set which is mapped by Map. so, here changes done in map interface will not impact the set interface. similarly changes done in set interface will not impact map.
+6.	`Difference between Adapter and Bridge ->`<br/>
+> In Bridge intent is to make abstractions and implementations to evolve independently. In Adaptor intent is to make unrelated classes to work together.<br/>
+> Bridge has to be design up-front then only we can have varying implementations and abstractions. Adaptor usually used where both classes already exists. e.g.-> legacy code need to be integrated with new code. <br/>
+> In terms of code they both are quite similar-> using other class object to perform functionality which is passed in a constructor.<br/>
+7. You need to have well thought and fairly clear design in front to be able design bridge pattern. 
+8.	It also very tough to change existing code to support such pattern.
+
+**Decorator ->**<br/>
+1.	When you want to enhance the behavior of existing object functionality as and when needed at runtime we can use decorator design pattern.
+2.	Decorator wraps object and provides same interface as wrapped object. so client does not need to change the code.
+3.	Suppose client using Message interface and TextMessage implements it and provide test in plain String. we need to support base64 and html encoding to message. so, decorator class Base64EncodedMessage will implement Message and will have reference to TextMessage inside it. by this it can take plain text and return encoded Text.
+4.	As we can see in decorator we have used Message object and due to it we can pass decorator also in future if needed. hence nesting decorator is also possible.
+5.	If we very large base class then it is not suitable to use decorator as decorator class will not need all such info.
+6.	Since decorator support recursive composition. if used it might lead to lots of small objects that add small functionality. which sometimes become difficult to debug. so keep it in mind while using recursive composition.
+7.	Decorator gives more flexibility as compare to simple inheritance as we can use same reference and can pass different decorators or plain implementation object at runtime. but don't just use decorator as a replacement of inheritance. if we wanted to add lots of code which is not matching behavior of parent in such case inheritance should be used.
+8.	Decorator should act like additional skin over object. they should not change behavior of existing object and should add new behavior which is related to existing object.
+9.	`Example ->` java.io packages contain lots of example of decorator design pattern. BufferedOutputStream is a Decorator that decorates any OutputStream Object and adds buffering to file writing operation. This improves the disk i/o performance by reducing number of writes. see attached pdf for detail example.
+10.	`Difference between Decorator and Composite ->`<br/>
+> Decorator intent is to "add to" existing behavior of existing object. Composite are meant for object aggregation only.<br/>
+> Decorator can be thought as degenerate composite with 1 component. Where as Composites support any number of components in aggregation (as it takes collection)<br/>
+
+**Composite ->**<br/>
