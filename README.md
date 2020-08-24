@@ -119,7 +119,7 @@ There are three categories of design patterns  -
 7.	Using class adapter you can override adaptee method also but don't do that as you end up with adapter that behaves differently then adaptee. which might lead to bugs.
 8.	prefer object adapter over class adapter as it provide flexibility that in future we can replace adaptee with child class. If we have both target and adaptee as classes we cannot use class adapter pattern. here object adapter is used.
 9.	Class adapter is also called two way adapter, since it can be used in place of target as well as adaptee.
-10.	java.io.InputStreamReader and java.io.OutputStreamWritter are examples of object adapter design pattern.
+10.	`Example ->`java.io.InputStreamReader and java.io.OutputStreamWritter are examples of object adapter design pattern.
 11.	Here Client wants to use Reader and Writer objects and if we have InputStream and OutputStream available. in such case InputStreamReader will be adaptor class which takes InputStream in constructor argument and perform conversion to make it compatible with Reader methods.
 12.	`Difference between Adapter and Decorator ->`<br/>
 > Simply adapt an object to another interface without changing behavior.On other hands Decorator enhances object behavior without changing interface. <br/>
@@ -141,7 +141,7 @@ There are three categories of design patterns  -
 **Decorator ->**<br/>
 1.	When you want to enhance the behavior of existing object functionality as and when needed at runtime we can use decorator design pattern.
 2.	Decorator wraps object and provides same interface as wrapped object. so client does not need to change the code.
-3.	Suppose client using Message interface and TextMessage implements it and provide test in plain String. we need to support base64 and html encoding to message. so, decorator class Base64EncodedMessage will implement Message and will have reference to TextMessage inside it. by this it can take plain text and return encoded Text.
+3.	Suppose client using Message interface and TextMessage implements it and provide text in plain String. we need to support base64 and HTML encoding to message. so, decorator class Base64EncodedMessage will implement Message and will have reference to TextMessage inside it. by this it can take plain text and return encoded Text.
 4.	As we can see in decorator we have used Message object and due to it we can pass decorator also in future if needed. hence nesting decorator is also possible.
 5.	If we very large base class then it is not suitable to use decorator as decorator class will not need all such info.
 6.	Since decorator support recursive composition. if used it might lead to lots of small objects that add small functionality. which sometimes become difficult to debug. so keep it in mind while using recursive composition.
@@ -153,3 +153,34 @@ There are three categories of design patterns  -
 > Decorator can be thought as degenerate composite with 1 component. Where as Composites support any number of components in aggregation (as it takes collection)<br/>
 
 **Composite ->**<br/>
+1.	We have a tree structure type of inheritance hierarchy of objects and we want them to be treated uniformly.
+2. 	In this design pattern base class/interface should have all the methods needed by any child. so sometimes it is not suitable to use as it forces all child's to provide body to those methods. 
+3.	Leaf will provide actual implementation and composite class delegates call to all the child's.
+4.	composite design pattern allows to write algorithms without worrying about whether node is leaf or composite.
+5. `Example-` Composite are used in many ui frameworks to represent tree of ui controls like JSF. In JSF we have UIViewRoot which act as composite class and other UIComponent implementations like UIOutput,UIMessage acts as a leaves. all classes extends common base class UIComponentBase which has methods like addChilderen and getChildCount. these methods body is provided by composite UIViewRoot. leaves classes like UIMessage provide empty body for such methods.
+6.	`Difference between Decorator and Composite ->`<br/>
+> Decorator deals with single object. Composite deals with tree structure of objects<br/>
+> Decorator used to add or modify single object behavior. In composite leaves and composite class have same interface and composite simply delegates operation to the children. <br/>
+7. Sometimes when we have variety of child, it is not possible to add all methods in component class and if add it to leaf itself then client need to check instance type using if else. this make it less useful.<br/>
+
+**FACADE ->**<br/>
+1.	When client has to interact with multiple classes/interfaces in a subsystem. In such case client is tightly coupled with those classes/interfaces. facade solves this problem.
+2.	It provide simple interface to the subsystem. Client will interact with just the facade now to get the same result.
+3.	It simplify the usage of functionality provided by sub-system.
+4.	`Implementation Steps -` Start by creating a Facade class<br/>
+> We determine all the use-cases/Tasks for which the subsystem is used for by client code.<br/>
+> We write methods that exposes each use-case.<br/>
+> these methods takes care of working with different classes of sub-system.<br/>
+5.	For example EMailFacade can be created and it can provide sendEmail method which take Order object. so, client just need to now call single method instead of calling different methods of different classes at various stages (like email template,email builder,stationary etc).
+6.	You can also create interface or abstract class for facade and client can use different classes to interact with different subsystem implementations.
+7.	If intention is just to provide loose coupling of classes of subsystem with client code and not worried about simplification provided by facade, the use can use abstract factory design pattern directly.
+8.	java.net.URL class is great example of Facade. This class provide simple method openStream() and we get an input stream to resource pointed by that URL object.<br/>
+URL url = new URL("http://google.com");<br/>
+url.openStream();<br/>
+9. This openStream method deals with various classes of java.net package and some internal sun packages.
+10.	`Difference between Facade and Adaptor ->`<br/>
+> Facade intent is to simplify usage of subsystem for client.Adaptor is simply to adapt an object to different interface that client uses.<br/>
+> Adaptor uses existing object and provide all the methods used by Client target. It always written to confirm to particular interface that client uses. On other hand Facade does not need to follow any target interface. it's aim is to provide simple method that simplify complex operations behind the scene.<br/>
+11.	Facade are often added over existing legacy code to simplify code usage & reduce coupling of client code to legacy code.
+
+**Flyweight ->**<br/>
