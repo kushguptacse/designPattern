@@ -184,3 +184,25 @@ url.openStream();<br/>
 11.	Facade are often added over existing legacy code to simplify code usage & reduce coupling of client code to legacy code.
 
 **Flyweight ->**<br/>
+1.	Our System uses large number of objects of a particular class and maintaining these instances is performance concern. here flyweight can be used.
+2.	Flyweight allows us to share an object in multiple contexts.But instead of sharing entire state of object, which may not be feasible, we divide object state into two parts: 1. intrinsic (state that is shared in every context and will be immutable) and 2. extrinsic (context specific state).We create objects with only intrinsic state and share them in multiple context.
+3.	Client or user of object provides extrinsic state to carry out its functionality.
+4.	We use factory pattern along with that so that client can get different fly-weight classes objects.
+5.	`Implementations ->` We start by defining intrinsic and extrinsic state of an object-><br/>
+5.1	we create interface flyweight to provide common methods that accept extrinsic state.<br/>
+5.2	In Implementation of shared flyweight we add intrinsic state and also implement methods.<br/>
+5.3	In Implementation of un-shared flyweight we ignore the extrinsic object as we have all state with-in object.<br/>
+5.4 flyweight factory class will provide caching of flyweights and also provides method to get them.(it is must in flyweight as client need easy way to get shared objects)<br/>
+5.5 client code will either maintain extrinsic state or compute it dynamically using flyweight.<br/>
+6.	Best example can be related to games where graphic images serves as intrinsic state and will remain same and cached by factory. on other hand location where image need to be draw serve as extrinsic states.
+7.	flyweight intrinsic state should be immutable for successful use of flyweight pattern.
+8.	It is useful only if you can extract out extrinsic fields out of object without any issue.
+9.	Some other design pattern like state and strategy can make use of flyweight.
+10.	`Example->` java.lang.Integer,Short,Byte,Character uses flyweight and keep copy of cached objects. for example in Integer class objects in range -127 to 128 are already cached and when asked via method valueOf it return cached object is value passed is in this range else new object is returned.
+11. String constant pool is also another example of flyweight. by calling intern method it will always return object from pool.
+12.	`Difference b/w flyweight and object-pool->`<br/>
+> Flyweight state is divided into two parts.client must provide part of state to it. ObjectPool contains all of its state encapsulated to itself.<br/>
+> Client will not modify the intrinsic state of flyweight instance as it is shared.In object pool client will change state of cached objects.<br/>
+13.`Pitfalls->` <br/>
+> Runtime cost is added as client has to maintain extrinsic state. client has to store it or need to create every time it needs to use flyweight. <br/>
+> Apart from graphical applications it is very tough to find this pattern use in web applications. <br/>
