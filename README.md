@@ -203,6 +203,26 @@ url.openStream();<br/>
 12.	`Difference b/w flyweight and object-pool->`<br/>
 > Flyweight state is divided into two parts.client must provide part of state to it. ObjectPool contains all of its state encapsulated to itself.<br/>
 > Client will not modify the intrinsic state of flyweight instance as it is shared.In object pool client will change state of cached objects.<br/>
-13.`Pitfalls->` <br/>
+13.	`Pitfalls->` <br/>
 > Runtime cost is added as client has to maintain extrinsic state. client has to store it or need to create every time it needs to use flyweight. <br/>
 > Apart from graphical applications it is very tough to find this pattern use in web applications. <br/>
+
+**Proxy ->**<br/>
+1.	We use it when we want to provide place holder of real object.<br/>
+> Protection proxy -> Control access to original object.<br/>
+> Remote proxy -> provide local representation of original object.<br/>
+> Virtual proxy -> Delay construction of original object until necessary.<br/>
+2.	`Implementation ->`<br/>
+> proxy must implement same interface as the real subject.<br/>
+> we can create actual object when required or can ask it out via constructor.<br/>
+> In method implementation of proxy we implement proxy's functionality before delegating to real object.<br/>
+3.	To provide proxy object we can use factory or compose design pattern.
+4.	we can also implement dynamic proxy in java.In such case proxy instance is created by client using java.lang.reflect.Proxy. Java reflection api need our subject class to implement some interface to create proxy (as it create class proxy which implement that same interface).
+5.	In Dynamic proxy class need to implement java.lang.reflect.InvocationHandler. it has invoke method which is called on every method invocation of proxy object.
+6. 	In case of authentication original object is passed via constructor of proxy itself. in such case we don't need to hold extra memory for fields.
+7.	In Hibernate lazy loading of classes uses proxy object using virtual implementation and original entity object is only created when asked.
+8.	Spring uses proxy pattern to provide support for feature like aop, transactions, caching.
+9.	Spring and Hibernate can create proxy of classes which do not implement interfaces also. for that they use third party frameworks like cglib, aspectJ to create DynamicProxies at runtime.
+10.	`Difference b/w Decorator and proxy->`<br/>
+> Proxy does not need actual object all the time for all operations. Decorator cannot work at all without hold on original Object.<br/>
+> Decorator adds extra feature to original object and used for that. Proxy purpose is to add feature which is independent of original object. it does not enhance original. it just do some extra common functionality like logging, auditing, authentication.<br/>
