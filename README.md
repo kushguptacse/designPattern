@@ -223,6 +223,18 @@ url.openStream();<br/>
 7.	In Hibernate lazy loading of classes uses proxy object using virtual implementation and original entity object is only created when asked.
 8.	Spring uses proxy pattern to provide support for feature like aop, transactions, caching.
 9.	Spring and Hibernate can create proxy of classes which do not implement interfaces also. for that they use third party frameworks like cglib, aspectJ to create DynamicProxies at runtime.
-10.	`Difference b/w Decorator and proxy->`<br/>
+10.	`Difference b/w Decorator and Proxy->`<br/>
 > Proxy does not need actual object all the time for all operations. Decorator cannot work at all without hold on original Object.<br/>
 > Decorator adds extra feature to original object and used for that. Proxy purpose is to add feature which is independent of original object. it does not enhance original. it just do some extra common functionality like logging, auditing, authentication.<br/>
+
+## Behavioral -> 
+**Chain Of Responsibility ->**<br/>
+1.	When you want to decouple a request's sender and receiver it is used.
+2.	It is used to achieve loose coupling in where a request from the client is passed to a chain of objects to process them. Later, the object in the chain will decide themselves who will be processing the request and whether the request is required to be sent to the next object in the chain or not.
+3.	Handlers can allow send request to filter in every case also. like Servlet filter chain allow request to propagate to each filter for dedicated work.
+4.	All Servlet implements javax.servlet.Filter interface which defines void doFilter(serveltReq,servletResp,FilterChain) method.
+5.	Implementations will use FilterChain object and call doFilter method to pass object to next handler.
+6.	`Difference b/w Chain Of Responsibility and Command->`<br/>
+> If handler can't handle request it can forward it to next handler. In Command there is no passing of request to next handler, Command handle it by itself.<br/>
+> It might be possible that request is not handled by any handler. In command request is handled always.<br/>
+> We cannot track handler and cannot undo action done by previous handler.Commands are Trackable, we can store the order in which commands executed and can't undo actions also.<br/>

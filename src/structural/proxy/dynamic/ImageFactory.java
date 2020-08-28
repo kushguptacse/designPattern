@@ -2,7 +2,7 @@ package structural.proxy.dynamic;
 
 import java.lang.reflect.Proxy;
 
-//factory to give original or proxy object
+//factory to give original or Proxy object
 public class ImageFactory {
 
 	private ImageFactory() {
