@@ -282,3 +282,11 @@ url.openStream();<br/>
 > Mediator implementation are specific to the object being mediated. observer totally works on interfaces and hence once implemented it can be used with any classes<br/>
 
 **Iterator ->**<br/>
+1.	Iterator allows way to access elements of an aggregate object in sequence while hiding actual internal data structure used.
+2.	In java Collection framework java.util.Iterator is used. it allows to iterate over any collection in sequence irrespective of internal data structure used like array or list.
+3.	Iterator keeps track of position so that they can provide data correctly.
+4.	Iterator can go out of sync if underlying collection is changed while iterator is currently in use.
+5.	We implement Iterator as an inner class. in this way iterator got hold to a internal data structure used by that class to give elements.
+6.	Iterator design pattern can also be used to read lines from file sequentially.
+7.	java.util.Scanner class also is an example of iterator design pattern. scannerObj.nextInt() gives next int from input stream.
+8.	`DisAdvantage->` Need to explicitly handle scenerio's where someone changes collection over which iterator is working currently.
