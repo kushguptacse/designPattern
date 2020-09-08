@@ -271,3 +271,14 @@ url.openStream();<br/>
 **Mediator ->**<br/>
 1.	Mediator encapsulates how a set of objects interact with each others. Due to this encapsulation there is a loose coupling between the interacting objects.
 2.	So when one object wants to call a method on another object. so instead of having reference to object2. object1 will call mediator method and mediator will then call object2 method.
+3.	So, in case one object perform some changes and then inform mediator. Now mediator will inform every other object that want's to listen to the changes in the first object. in such case if one object has slow performance it might impact overall performance of entire system.
+4.	with time sometimes meditor code grows to much and become complex as all the logic of informing various other controls of value change is on mediator.
+5.	We can use observer design pattern to implement notification mechanism through which object can notify mediator about there value change.
+6.	`Example->` <br/>
+> front controller like dispatcher servlet in Spring is an example of Mediator. It is specialized version of mediator as here instead of verify every other object in the system, only the desired controller is informed and served the request.<br/>
+> javax.swing.ButtonGroup is another example of mediator. if one button is selected then all other buttons in the group is informed and they update there state to not selected.<br/>
+7.	`Difference b/w Mediator and Observer->`<br/>
+> In Mediator if any object changes all other objects are notified about the changes. In Observer there is one to many relationship only i.e. on change of desired object all listener will get notified but changes done to any listener object will not be notified to each other.<br/>
+> Mediator implementation are specific to the object being mediated. observer totally works on interfaces and hence once implemented it can be used with any classes<br/>
+
+**Iterator ->**<br/>
