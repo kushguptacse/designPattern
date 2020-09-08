@@ -183,9 +183,9 @@ url.openStream();<br/>
 > Adaptor uses existing object and provide all the methods used by Client target. It always written to confirm to particular interface that client uses. On other hand Facade does not need to follow any target interface. it's aim is to provide simple method that simplify complex operations behind the scene.<br/>
 11.	Facade are often added over existing legacy code to simplify code usage & reduce coupling of client code to legacy code.
 
-**Flyweight ->**<br/>
+**flyweight ->**<br/>
 1.	Our System uses large number of objects of a particular class and maintaining these instances is performance concern. here flyweight can be used.
-2.	Flyweight allows us to share an object in multiple contexts.But instead of sharing entire state of object, which may not be feasible, we divide object state into two parts: 1. intrinsic (state that is shared in every context and will be immutable) and 2. extrinsic (context specific state).We create objects with only intrinsic state and share them in multiple context.
+2.	flyweight allows us to share an object in multiple contexts.But instead of sharing entire state of object, which may not be feasible, we divide object state into two parts: 1. intrinsic (state that is shared in every context and will be immutable) and 2. extrinsic (context specific state).We create objects with only intrinsic state and share them in multiple context.
 3.	Client or user of object provides extrinsic state to carry out its functionality.
 4.	We use factory pattern along with that so that client can get different fly-weight classes objects.
 5.	`Implementations ->` We start by defining intrinsic and extrinsic state of an object-><br/>
@@ -238,3 +238,36 @@ url.openStream();<br/>
 > If handler can't handle request it can forward it to next handler. In Command there is no passing of request to next handler, Command handle it by itself.<br/>
 > It might be possible that request is not handled by any handler. In command request is handled always.<br/>
 > We cannot track handler and cannot undo action done by previous handler.Commands are Trackable, we can store the order in which commands executed and can't undo actions also.<br/>
+
+**Command ->**<br/>
+1.	When you want a method call to be treated like an object Command is used.Actual info like arguments and actual operation is encapsulated inside an object called command. 
+2.	Advantage of command is that what would have been a method call now an object and can be stored in a collection and actual operation can be executed later.
+3.	In command Undo or Redo support is present for particular object. if supporting such operations keep track of duration of queued objects as the size of may get increased in such case. 
+4.	Command can inherit from command if they require to re-use some code from parent.
+5.	For implementing undo feature in Command Memento design pattern can be used.it allows to store state of receiver without knowing internal objects used by receiver.
+6.	`Example->` java.lang.Runnable is Command.<br/>
+> we create object of class implementing Runnable and provide all the detail its needed<br/>
+> In run method we call actual operation on Receiver<br/>
+> we can also send the object to other parts of code for later execution when needed<br/>
+7.	`Difference b/w Command and Strategy->`<br/>
+> Command contains operation which is executed by the receiver(just like delegating a call to operation of receiver using receiver object).Strategy contains how the operation is carried out.<br/>
+> Command encapsulates operation that needed to be performed.Strategy encapsulates particular algorithm<br/>
+8.	Error handling is difficult to implement in command.similarly return value of command is also tough. as client does not have such information available.
+
+**Interpreter ->**<br/>
+1.	We use it when we want to process a "language" with simple rules or grammar. e.g.-> File access require user role and Admin role.
+2.	Interpreter allows rule of language to be represented as data structure and then interpret sentences in that language.
+3.	Each class in this pattern represents a rule in the language. Classes also provide method to interpret expression.
+4.	Apart from interpreting expressions you can also do other things like pretty printing that uses already built interpreter.
+5.	parsing logic is not defined by this design pattern. you have to think that logic.
+6.	Context object can be used to store and access state of interpreter.
+7.	java.util.regex.Pattern is example of Interpreter design pattern. here in compile method of Pattern abstract syntax tree is created representing the Grammar rule. and pattern.matcher takes takes String to be interpreted using the grammar rule.
+8.	`Difference b/w Interpreter and Visitor->`<br/>
+> Grammar rules are represented as object structure. visitor represents operations to be performed as object structure.<br/>
+> Has access to properties it needs for interpretation.In visitor observable and observer are used to make property available.<br/>
+9.	for every rule a separate class needed which can leads to large number of classes.
+10.	for complex language rules this design pattern is not suitable.
+
+**Mediator ->**<br/>
+1.	Mediator encapsulates how a set of objects interact with each others. Due to this encapsulation there is a loose coupling between the interacting objects.
+2.	So when one object wants to call a method on another object. so instead of having reference to object2. object1 will call mediator method and mediator will then call object2 method.
