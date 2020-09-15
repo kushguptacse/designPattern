@@ -313,3 +313,28 @@ url.openStream();<br/>
 1. when we want to notify state change in one object to all the interested objects this design pattern can be used. it is also called pub-sub or publisher-subscriber.
 2.	Here one-to-many relationship is established. where listeners and publishers are not tightly coupled.
 3.	mostly it is used like that-> publisher tells observers that something has changed in object (subject is called observable here). then each observer according to need ask for the changes done and do modifications.this make it more generic.
+4.	It might lead to infite loop if inside notification method of one observer same method is called from which we are notifying the observers. like on update of price notification is send and inside notification method price is updated again.
+5.	One slow notification handle can impact entire system. more the number of observer more time the operation might take. and more threads need to wait in such case.
+6.	 To improve performance we can define multiple method of attachment which will notify different observers according to interest. e.g. mouseHover, mouseClick.
+7.	Observer is present inside jdk also. java.util.Observer interface and java.util.Observable class available which can be used.
+8.	Spring framework ApplicationListener intercace is example of observer design pattern.
+9.	`Difference b/w Mediator and Observer->`<br/>
+> In Mediator if any object changes all other objects are notified about the changes. In Observer there is one to many relationship only i.e. on change of desired object all interested listener will get notified but changes done to any listener object will not be notified to each other.<br/>
+> Mediator implementation are specific to the object being mediated. observer totally works on interfaces and hence once implemented it can be used with any classes<br/>
+
+**Null Object ->**<br/>
+1.	Null object design pattern is used where we want to provide alternative to traditional null checks.
+2.	It basically do nothing and will not store anything if some operation is called on it.
+3.	Null objects never transforms into a real object.
+4.	If a method in a null object has some return type then either we can return default value of it like 0 in case of int or return another null object.
+5. Code which creates objects can decide some criteria on which actual object is returned or null object is returned.
+6.	class which is using null object should not need to handle null object differently.
+7.	If there is a need to transform null object to real object then use state design pattern with null object as one of the states.
+8. since null object do nothing we can create singleton instance of null class object.
+9. 	The various adaptor classes from java.awt.event packages like MouseAdaptor can be considered as example of Null Object pattern.the only reason they are not 100% is they are abstract classes. but yes they have empty method body of all the methods of MouseListner interface and they also does not have any abstract method of there own.
+10.	`Difference b/w Null Object and Proxy->`<br/>
+> Null object never transform into real object. but proxy will transform into real object if needed.</br>
+> Null object never needs reference to original object. proxy will need hold of orignal object.</br>
+> Null object does not have any behavior. proxy has some behavior.</br>
+11.	Null object cannot be possible for all classes. as doing nothing might introduce some un-predictable behavior. sometimes it is not easy to find "do nothing" objects.
+ 
