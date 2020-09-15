@@ -240,7 +240,7 @@ url.openStream();<br/>
 > We cannot track handler and cannot undo action done by previous handler.Commands are Trackable, we can store the order in which commands executed and can't undo actions also.<br/>
 
 **Command ->**<br/>
-1.	When you want a method call to be treated like an object Command is used.Actual info like arguments and actual operation is encapsulated inside an object called command. 
+1.	When you want a method call to be treated like an object, Command is used.Actual info like arguments and actual operation is encapsulated inside an object called command. 
 2.	Advantage of command is that what would have been a method call now an object and can be stored in a collection and actual operation can be executed later.
 3.	In command Undo or Redo support is present for particular object. if supporting such operations keep track of duration of queued objects as the size of may get increased in such case. 
 4.	Command can inherit from command if they require to re-use some code from parent.
@@ -290,3 +290,26 @@ url.openStream();<br/>
 6.	Iterator design pattern can also be used to read lines from file sequentially.
 7.	java.util.Scanner class also is an example of iterator design pattern. scannerObj.nextInt() gives next int from input stream.
 8.	`DisAdvantage->` Need to explicitly handle scenerio's where someone changes collection over which iterator is working currently.
+
+**Memento ->**<br/>
+1.	It is used when we want to store's object state for latter use without exposing the internal details of the state.
+2.	undo functionality is one of the use-case of memento design pattern. we can also use saved state to restore state of object back.
+3.	this pattern is combined with command design pattern to provide undo functionality.
+4.	In it originator object state is saved in memento. this memento class can be read and write only by originator class. Originator will provide method to return snapshot out. which will return instance of memento.
+5.	Similarly it provides reset method also which takes memento object as argument and will reset its own state according to memento object state. 
+6. it is often combined with command design pattern to provide undo functionality.
+7.	If state which is saved in memento is large. then we might need a solution to discard older states to avoid too much memory used.
+8.	resetting to previous state might impact objects that uses that state. so be careful while doing undo.
+9.	If there is a fixed way of creating memento then we can only store incremental state instead of entire state.
+10.	`Example->` undo support provided by javax.swing.text.JTextComponent and it's child like JTextField, JTextArea. javax.swing.undo.UndoManager act as care-taker and implementations of java.swing.undo.UndoableEdit interface act as mementos. The javax.swing.text.Document implementation which is model for text components act as originator. 
+11. java.lang.Serializable is not an example of Memento design pattern. we can use serialization to save state of originator in memento inner class.
+12.	`Difference b/w memento and command` -><br/>
+> memento is used to store object state for later use. command is used to make operations/actions behave as objects.<br/>
+> memento requires state to be saved. if undo operation is not needed command does not need to save the state<br/>
+> memento state is sealed and can be read by originator only.command can be read by anyone<br/>
+13.	If originator state has nested hierarchy of objects then deep copy is needed to save state.
+
+**Observer ->**<br/>
+1. when we want to notify state change in one object to all the interested objects this design pattern can be used. it is also called pub-sub or publisher-subscriber.
+2.	Here one-to-many relationship is established. where listeners and publishers are not tightly coupled.
+3.	mostly it is used like that-> publisher tells observers that something has changed in object (subject is called observable here). then each observer according to need ask for the changes done and do modifications.this make it more generic.
