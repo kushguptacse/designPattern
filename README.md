@@ -351,3 +351,25 @@ url.openStream();<br/>
 > State implements actual behavior of objects specific to particular state. Command calls operation on object.</br>
 9.	Sometimes lot of classes needed for different states of context object. each require unit testing.
 10.	If states transition is managed by states then there is tight coupling between states.
+
+**Strategy ->**<br/>
+1.	It allows us to encapsulate algorithm in a class.So, now we can configure our main object/context to use object of this class.
+2.	Client will use context object only and pass appropriate strategy object to it. and context will have reference of interface which different algorithms implements. in this way changing algo is easy. e.g. -> sorting can be interface and bubble-sort can be one implementation.
+3.	To make client independent of strategy. we can create default constructor in context class which will use default strategy implementation. like if no algo passed default sorting class quick-sort can be used.
+4.	Similar to state pattern strategy is also state-less objects. i.e. no instance variables inside them. because of it they can be shared easily among contexts.
+5.	java.util.Comparator is example of Strategy pattern.we can create multiple implementations of comparator and provide comparison criteria. then by using sort method we pass that comparator object.
+6.	`Difference b/w State and Strategy->`<br/>
+> We create class per algorithm in Strategy. We create class per state in State</br>
+> Strategy do not need to know about each other. If State transition is handle by state itself then state need to know other state.</br>
+7.	Since client pass the Strategy object to context. so client is closely bind with Strategy and with introduction of new Algorithm client might needed to change it's logic.
+
+**Template ->**<br/>
+1.	In it we define skeleton of an algorithm in a method as a series of steps. some of which are fixed and some needs to be changed every-time. subclass will provide code for change part of the code. In this way sequence is fixed to perform any operation.
+2.	JDBCTemplate of Spring class is example of it.
+3.	The pattern provides abstract method as changing part which then override by child.
+4.	make public method which define steps in template class as final. so that child don't override it.
+5.	java.util.AbstractMap and java.util.AbstractSet has methods which are example of template method. for example inside removeAll some methods are called whose body is provided by child.
+6.	`Difference b/w Template and Strategy->`<br/>
+> We create class per algorithm in Strategy. Template single algorithm exists and child provide just code of some parts.</br>
+>	Inheritance is used in template Design pattern.In strategy composition is used inside context class via which Strategy object is provided.</br>
+7.	Unit testing is difficult as particular step requires some data to be already available as it was prepared in previous step execution. 
