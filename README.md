@@ -337,4 +337,17 @@ url.openStream();<br/>
 > Null object never needs reference to original object. proxy will need hold of orignal object.</br>
 > Null object does not have any behavior. proxy has some behavior.</br>
 11.	Null object cannot be possible for all classes. as doing nothing might introduce some un-predictable behavior. sometimes it is not easy to find "do nothing" objects.
- 
+
+**State->**<br/>
+1.	State design pattern allows our object to behave differently based on its state changed.
+2.	This pattern allows to define each state specific behaviors in separate class.
+3.	Instead of if-else different objects are used for different states. state transition can be handle by state itself in such case each state knows about existence of other state. or it can be handled at context/main class.
+4.	Introduction of new state will not impact original class. Each distinct values for state of object (context) will represent separate class in our system.
+5.	Our main/context class method implementation will delegate the operation to current state object. Client will know about context class only and will not be aware of different possible states.
+6.	JSF framework's life cycle implementation is example of State design pattern. FacesServlet invoke execute and render methods of life-cycle. life-cycle instance collaborates with different phases to execute JSF request. Each phase represent a state here. these 6 phases are -> restoreView, applyRequestValues, processValidationphase, UpdateModelValues, invokeApplication, renderResponse.
+7.	The life cycle also provides facesContext object to these phases to provide state  specific behavior.
+8.	`Difference b/w State and Command->`<br/>
+> State represent current state of context object. Command represents operation/action of object.</br>
+> State implements actual behavior of objects specific to particular state. Command calls operation on object.</br>
+9.	Sometimes lot of classes needed for different states of context object. each require unit testing.
+10.	If states transition is managed by states then there is tight coupling between states.
