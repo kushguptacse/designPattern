@@ -373,3 +373,7 @@ url.openStream();<br/>
 > We create class per algorithm in Strategy. Template single algorithm exists and child provide just code of some parts.</br>
 >	Inheritance is used in template Design pattern.In strategy composition is used inside context class via which Strategy object is provided.</br>
 7.	Unit testing is difficult as particular step requires some data to be already available as it was prepared in previous step execution. 
+
+**Visitor ->**<br/>
+1. It provides features that a new operation can be perform on a object without changing the class definition of object.
+2. Each time we need to add a new operation a new subclass of visitor is created and implement the operation in that class and visit the object structure.
